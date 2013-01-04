@@ -1,434 +1,79 @@
-<!--start: Header -->
-    <header>
-        
-        <!--start: Container -->
-        <div class="container">
+<% include header %>
+
+
+<!--start: Container -->
+<div class="container">
             
-            <!--start: Navigation -->
-            <div class="navbar navbar-inverse">
-                <div class="navbar-inner">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="index.html">tabula</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li ><a href="about.html">About</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="social-icons.html">Social Icons</a></li>
-                                    <li><a href="icons.html">Glyphicons Halflings</a></li>
-                                    <li><a href="icons-pro.html">Glyphicons PRO</a></li>
-                                    <li><a href="icons_set2.html">Font Awesome Icons</a></li>
-                                    <li><a href="typography.html">Typography</a></li>
-                                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                                    <li><a href="list-styles.html">List Styles</a></li>
-                                    <li><a href="charts.html">Charts</a></li>
-                                    <li><a href="sliders.html">Sliders</a></li>
-                                </ul>
-                            </li>
-                            <li ><a href="portfolio.html">Portfolio</a></li>                                    
-                            <li ><a href="pricing.html">Pricing</a></li>
-                            <li ><a href="blog.html">Blog</a></li>
-                            <li ><a href="contact.html">Contact</a></li>
-                            <li ><a href="login.html">Login</a></li>
-                            <li ><a href="register.html">Register</a></li>
-                        </ul>
+    <!--start: Wrapper-->
+    <div id="wrapper">
+    
+        <!-- start: Wall -->
+        <div id="wall" class="row-fluid">
+
+
+        	<% for(var i = 0; i < result.length; i++){ %>
+	            <div class="span3 item">
+	                <div class="quotes">
+	                    <div class="quote">
+	                    Eng：<%= result[i].english %><br>
+	                    Jp：<%= result[i].japanese %>
+	                    </div>
+	                    <!--
+	                    <div class="author">
+	                        
+	                    </div>
+	                    -->
+	                    <div class="meta">
+	                        <span><i class="fa-icon-calendar"></i><%= result[i].modified %></span>
+	                        <!--<span><i class="fa-icon-heart-empty"></i> 88</span>-->
+	                    </div>
+	                </div>
+	            </div>
+			<%}%>
+
+            <div class="span3 item">
+                <div class="quotes">
+                    <div class="quote">
+                    “That’s not what we think design is. It’s not just what it looks like and feels like. Design is how it works”
+                    </div>
+                    <div class="author">
+                        - Steve Jobs -
                     </div>
                 </div>
-            </div>  
-            <!--end: Navigation -->
-            
-        </div>
-        <!--end: Container-->           
-            
-    </header>
-    <!--end: Header-->
-    <!--start: Container -->
-    <div class="container">
-                
-        <!--start: Wrapper-->
-        <div id="wrapper">
-        
-            <!-- start: Wall -->
-            <div id="wall" class="row-fluid">
-
-                <div class="span3 item">
-                    <div class="quotes">
-                        <div class="quote">
-                        “That’s not what we think design is. It’s not just what it looks like and feels like. Design is how it works”
-                        </div>
-                        <div class="author">
-                            - Steve Jobs -
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo5.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="quotes">
-                        <div class="quote">
-                        “In most people’s vocabularies, design means veneer. It’s interior decorating. It’s the fabric of the curtains of the sofa. But to me, nothing could be further from the meaning of design. Design is the fundamental soul of a human-made creation that ends up expressing itself in successive outer layers of the product or service.”
-                        </div>
-                        <div class="author">
-                            - Steve Jobs -
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo1.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>
-                    </div>  
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo9.jpg") %></a>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo2.jpg") %></a>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo3.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo4.jpg") %></a>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="flex-video">
-                        <iframe src="http://player.vimeo.com/video/3538565?portrait=0&color=ffffff" width="480" height="256" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo6.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo7.jpg") %></a>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo8.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item scenery">
-                    <div class="quotes">
-                        <div class="quote">
-                            “Innovation distinguishes between a leader and a follower.” 
-                        </div>
-                        <div class="author">
-                            - Steve Jobs -
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="quotes">
-                        <div class="quote">
-                        “Visual design is often the polar opposite of engineering: trading hard edges for subjective decisions based on gut feelings and personal experiences. It’s messy, unpredictable, and notoriously hard to measure. The apparently erratic behavior of artists drives engineers bananas. Their decisions seem arbitrary and risk everything with no guaranteed benefit.”
-                        </div>
-                        <div class="author">
-                            - Scott Stevenson -
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo10.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo11.jpg") %></a>
-                        <div class="description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                            </p>
-                        </div>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="span3 item">
-                    <div class="picture">
-                        <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo12.jpg") %></a>
-                        <div class="meta">
-                            <span><i class="fa-icon-calendar"></i>1 June 2011</span>
-                            <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
-                            <span><i class="fa-icon-heart-empty"></i> 88</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <!-- end: Wall -->              
-                    
-        </div>
-        <!--end: Container-->
-    
-    </div>
-    <!-- end: Wrapper  -->          
 
-    <!-- start: Footer -->
-    <div id="footer">
-        
-        <!-- start: Container -->
-        <div class="container">
-    
-            <!-- start: Row -->
-            <div class="row-fluid">
-
-                <!-- start: About -->
-                <div class="span3">
-                    
-                    <h3>creativeLabs</h3>
-
-                    <p>
-                        <i class="fa-icon-map-marker"></i> 30 South Park Avenue
-                    </p>
-                    <p> 
-                        <i class="fa-icon-map-marker"></i> San Francisco, CA 94108, USA
-                    </p>    
-                    <p> 
-                        <i class="fa-icon-phone"></i> Phone: (123) 456-7890
-                    </p>
-                    <p> 
-                        <i class="fa-icon-print"></i> Fax: +08 (123) 456-7890
-                    </p>
-                    <p>
-                        <i class="fa-icon-envelope"></i> Email: contact@companyname.com
-                    </p>
-                    <p>
-                        <i class="fa-icon-globe"></i> Web: companyname.com
-                    </p>
-                        
-                </div>
-                <!-- end: About -->
-
-                <!-- start: Latest Tweets -->
-                <div class="span3">
-                    
-                    <h3>Latest Tweets</h3>
-                    
-                    <ul id="twitter">
-                        
-                    </ul>
-
-                    <div class="clear"></div>
-                    
-                    
-                </div>
-                <!-- end: Latest Tweets -->
-
-                <!-- start: Photo Stream -->
-                <div class="span3">
-                    
-                    <h3>Flickr Photo Stream</h3>
-                    <div class="flickr-widget">
-                        <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=12&display=latest&size=s&layout=x&source=user&user=29609591@N08"></script>
-                        <div class="clear"></div>
+            <!--
+            <div class="span3 item">
+                <div class="picture">
+                    <a class="image" href="project.html" title="Title"><%- helper.loader("img", "photo5.jpg") %></a>
+                    <div class="description">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        </p>
                     </div>
-                    
+                    <div class="meta">
+                        <span><i class="fa-icon-calendar"></i>1 June 2011</span>
+                        <span><i class="fa-icon-user"></i> <a href="#">lucas</a></span>
+                        <span><i class="fa-icon-heart-empty"></i> 88</span>
+                    </div>
                 </div>
-                <!-- end: Photo Stream -->
-                
-                <!-- start: Follow Us -->
-                <div class="span3">
-                    
-                    <h3>Follow Us</h3>
-                    
-                    <a href="#" class="social-dribbble"></a>
-                    <a href="#" class="social-twitter"></a>
-                    <a href="#" class="social-flickr"></a>
-                    <a href="#" class="social-facebook"></a>
-                    <a href="#" class="social-linkedin"></a>
-                    <a href="#" class="social-vimeo"></a>
-                    <a href="#" class="social-youtube"></a>
-                    <a href="#" class="social-delicious"></a>
-                    <a href="#" class="social-rss"></a>
-                    <a href="#" class="social-picassa"></a>
-                    <a href="#" class="social-deviantart"></a>
-                    <a href="#" class="social-technorati"></a>
-                    <a href="#" class="social-stumbleupon"></a>
-                    <a href="#" class="social-appstore"></a>
-                    <a href="#" class="social-paypal"></a>
-                    <a href="#" class="social-myspace"></a>
-                    <a href="#" class="social-pinterest"></a>
-                    <a href="#" class="social-soundcloud"></a>
-                    <a href="#" class="social-behance"></a>
-                    <a href="#" class="social-instagram"></a>
-                    <a href="#" class="social-googleplus"></a>
-    
-                </div>
-                <!-- end: Follow Us -->
-                
             </div>
-            <!-- end: Row -->
-        
+            -->
         </div>
-        <!-- end: Container  -->    
-
-    </div>
-    <!-- end: Footer -->
-    
-    <!-- start: Under Footer -->
-    <div id="under-footer">
-        
-        <!-- start: Container -->
-        <div class="container">
-            
-            <!-- start: Row -->
-            <div class="row-fluid">
-
-                <!-- start: Under Footer Logo -->
-                <div class="span2">
-                    <div id="under-footer-logo">
-                        <a class="brand" href="#">tabula</a>
-                    </div>
-                </div>
-                <!-- end: Under Footer Logo -->
-
-                <!-- start: Under Footer Copyright -->
-                <div class="span9">
-                    
-					<div id="under-footer-copyright">
-                        &copy; 2012, <a href="http://clabs.co">creativeLabs</a>. Designed by <a href="http://clabs.co">creativeLabs</a> in Poland <img src="images/poland.png" alt="Poland" style="margin-top:-4px">
-                    </div>                    
-                </div>
-                <!-- end: Under Footer Copyright -->
-
-                <!-- start: Under Footer Back To Top -->
-                <div class="span1">
-                        
-                    <div id="under-footer-back-to-top">
-                        <a href="#"></a>
-                    </div>
+        <!-- end: Wall -->              
                 
-                </div>
-                <!-- end: Under Footer Back To Top -->
-            
-            </div>
-            <!-- end: Row -->
-            
-        </div>  
-        <!-- end: Container  -->
-        
     </div>
-    <!-- end: Under Footer -->  
+    <!--end: Container-->
+
+</div>
+<!-- end: Wrapper  -->          
+
+
+<% include footer %>
+
+
+
+
 
 <!-- Le javascript
 ================================================== -->
@@ -447,4 +92,91 @@
 <%- helper.loader("js", "bootstrap-collapse.js") %>
 <%- helper.loader("js", "bootstrap-carousel.js") %>
 <%- helper.loader("js", "bootstrap-typeahead.js") %>
+-->
+
+
+
+
+<!--
+<ul id="ul">
+<% for(var i = 0; i < result.length; i++){ %>
+<li>
+<p><b><%= result[i].english %><b></p>
+<p><%= result[i].japanese %></p>
+<p><%= result[i].modified %></p>
+</li>
+<%}%>
+</ul>
+-->
+<!--
+<ul id="ul">
+<li>Can I get this?<br>
+訳：これくださる？（これください）
+</li>
+
+<li>
+Can we get the check?<br>
+訳：お会計お願いします。
+</li>
+
+<li>
+Are you in line?<br>
+訳：並んでますか？
+</li>
+
+<li>
+Can you take me to the 47st 8 Av?<br>
+タクシー等で、47st 8 Avに連れて行ってくれますか？
+</li>
+
+<li>
+relatively<br>
+比較的
+</li>
+
+<li>
+That would be good!<br>
+よさげ！
+</li>
+
+<li>
+That woulf be worth<br>
+悪そうだな...
+</li>
+
+<li>
+I'm tired beacause too much work to handle.<br>
+疲れたよー。たくさん仕事があって扱いきれなくてさ
+</li>
+
+<li>
+as much as I can<br>
+自分の出来るように
+</li>
+
+<li>
+It's gonna be rain.<br>
+雨降りそう
+</li>
+
+<li>
+Thank you, I apreciate it.<br>
+</li>
+
+<li>
+I usually drink a cup off cofee.<br>
+I drank a glass off water.
+</li>
+
+<li>
+I'm here to meke a buliding card.<br>
+Is it right place?<br>
+カード作りに来たのですが、ここでいいですか？
+</li>
+
+<li>
+made it!<br>
+やったぜ！
+</li>
+</ul>
 -->
