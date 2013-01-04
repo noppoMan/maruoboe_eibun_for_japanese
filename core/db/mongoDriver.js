@@ -1,4 +1,8 @@
 /**
+* mongoose wrapper module
+*/
+
+/**
 * Module dependencies.
 */
 var _mongo = require('mongoose');

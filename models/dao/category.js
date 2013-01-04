@@ -6,25 +6,16 @@ var Class = require("../../core/libraries/class");
 /**
 * constructor
 */
-function article(){
+function category(){
 	this.connectionName = "mongo_master";
 	this.schema = {
-		english : String,
-		japanese : String,
-		soundFilePath : String,
+		categoryId : int,
+		name : String,
 		created : {type: Date, default: Date.now},
 		modified : {type: Date, default: Date.now}
 	}
 }
-var model = Class.modelInit(article);
-
-//method
-model.addMethod("test", function(){
-	//thisの参照は、modelクラスobjectである
-	console.log(this);
-	console.log("tinpo");
-});
-
+var model = Class.modelInit(category);
 
 
 //モジュール登録

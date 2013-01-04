@@ -1,18 +1,10 @@
-exports.getDBConnectInfo = function(connectionName){
-	switch(connectionName){
-		case "mongo_master":
-			return {
-				adapter : 'mongo',
-				host : 'localhost',
-				dbName : 'maruoboe_eibun',
-				port : null
-			}
-		default:
-			return {
-				adapter : 'mongo',
-				host : 'localhost',
-				dbName : 'mike_tokyo',
-				port : null
-			}
+var database = {
+	config : {},
+	add : function(key, object){
+		this.config[key] = object;
+	},
+	get : function(key){
+		return this.config[key]
 	}
 }
+module.exports = database;
