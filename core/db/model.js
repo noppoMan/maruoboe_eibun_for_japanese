@@ -2,9 +2,9 @@
 /**
 * module dependencies
 */
-var Class = require("../../core/utils/class");
+var Class = require("../../core/libraries/class");
 var dbConf = require("../../config/database");
-var uf = require("../../core/utils/utilFunctions");
+var uf = require("../../core/libraries/utils");
 
 /**
 * constructor
@@ -22,21 +22,23 @@ model.prototype = {
 		if(uf.isset(this.connectionName)){
 			connectionName = this.connectionName;
 		}
-		//設定からDB接続情報を取得
-		var dbCnf = dbConf.getDBConnectInfo(connectionName);
-		var driverPath = "../../core/db/" + dbCnf.adapter + "Driver";
+
+		if(uf.empty(connectionName)){
+			throw new Error("argument error uccured: connectionName is not empty");
+		}
+
+		//get db connection info from config
 		try{
+			var dbCnf = dbConf.get(connectionName);
+			var driverPath = "../../core/db/" + dbCnf.adapter + "Driver";
 			var driver = require(driverPath);
 			this.db = new driver();
 		}catch(e){
 			throw new Error("Driver not found Exception  : " + driverPath);
 		}
 
-		if(!uf.isset(connectionName) || uf.empty(connectionName)){
-			throw new Error("argument error uccured: connectionName is not empty");
-		}
-		//try to connecto db
-		this.db.createConnection(dbCnf.host, dbCnf.dbName);
+		//try to connect db
+		this.db.createConnection(dbCnf.host, dbCnf.dbName, dbCnf.port);
 	},
 	getCollection : function(colName, schema){
 		if(!uf.isset(colName)){
@@ -51,10 +53,17 @@ model.prototype = {
 		if(uf.inArray(this.cacheCollections, colName)){
 			return this.cacheCollections[colName];
 		}
-		スキーマ設定をキャッシュする
+		スキーマobjectをキャッシュする
 		this.cacheCollections[colName] = this.db.getCollection(colName, schema);
 		*/
-		return this.db.getCollection(colName, schema);//this.cacheCollections[colName];
+
+		var col = this.db.getCollection(colName, schema);
+
+		//動的メソッド追加関数
+		col.addMethod = function(methodName, logic){
+			eval("col." + methodName + "=" + logic);
+		}
+		return col;
 	}
 }
 

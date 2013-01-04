@@ -6,17 +6,16 @@ var Class = require("../../core/libraries/class");
 /**
 * constructor
 */
-function article(){
+function articleFullTextSearch(){
 	this.connectionName = "mongo_master";
 	this.schema = {
-		english : String,
 		japanese : String,
-		soundFilePath : String,
+		soundFilePath : Array,
 		created : {type: Date, default: Date.now},
 		modified : {type: Date, default: Date.now}
 	}
 }
-var model = Class.modelInit(article);
+var model = Class.modelInit(articleFullTextSearch);
 
 //method
 model.addMethod("test", function(){

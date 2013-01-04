@@ -4,9 +4,36 @@
  */
 
 exports.index = function(req, res){
-	var article = require('../models/dao/article');
+	var facadeArticle = require('../models/facades/facadeArticle');
+    //var mbSegmentetor = require('../core/libraries/mbSegmentetor');
+/*    var uf = require('../core/libraries/utils');
+    uf.async(
+        function(){
 
-    res.render('index', {title:'Address Book'});
+        },
+        function(string, method, callBack){
+
+        },
+        function(callBack){
+
+        }
+    );
+*/
+
+    var serachWord = req.query.search_word;
+
+    var options = {};
+    if(serachWord != undefined){
+        options.searchWord = serachWord;
+    }
+
+    //ms = new mbSegmentetor();
+    //ms.getResult2Katakana("これいくらですか？", function(result){
+            facadeArticle.getDocument(function(object){
+                res.render('index', {title:'Address Book', result : object.result});
+            }, options);
+    //});
+
     /*
     var con = new article();
     con.english = "test";
