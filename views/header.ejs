@@ -71,10 +71,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="index.html">MaruoboeEibun JP</a>
+                <%- helper.link("", "MaruoboeEibun JP", {class : "brand"})%>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><%- helper.link("", "Home") %></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -82,8 +82,14 @@
                                 <li><a href="icons.html">Refine</a></li>
                             </ul>
                         </li>
-                        <li ><a href="about.html">About</a></li>
-                        <li ><a href="contact.html">Register Articles</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Article<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li ><%- helper.link("article/add", "New post") %></li>
+                                <!--<li ><%- helper.link("article/edit", "Edit") %></li>-->
+                            </ul>
+                        </li>
+                        <li ><%- helper.link("about", "About") %></li>
                         <li ><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>

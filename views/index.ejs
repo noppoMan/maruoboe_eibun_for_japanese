@@ -24,7 +24,8 @@
 	                    </div>
 	                    -->
 	                    <div class="meta">
-	                        <span><i class="fa-icon-calendar"></i><%= result[i].modified %></span>
+	                        <span><i class="fa-icon-calendar"></i><%= helper.dateFormat(result[i].modified) %></span>
+                            <span><%- helper.link("article/edit", "Edit")%></span>
 	                        <!--<span><i class="fa-icon-heart-empty"></i> 88</span>-->
 	                    </div>
 	                </div>

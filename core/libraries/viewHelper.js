@@ -1,7 +1,13 @@
 var appConfig = require("../../config/appConfig");
 
-exports.link = function(){
-	
+exports.link = function(path, innerHtml, options){
+	var addInfo = "";
+	if(typeof(arguments[2]) != "undefined"){
+		for(key in options){
+			addInfo += key + "='" + options[key] + "' ";
+		}
+	}
+	return "<a href='" + appConfig.get("BASE_URL") + path + "'" + addInfo +">" + innerHtml + "</a>";
 }
 
 
@@ -25,4 +31,11 @@ exports.loader = function(type, path, options){
 			break;
 	}
 	return tag;
+}
+
+
+exports.dateFormat = function(date){
+	var string = date.toString();
+	var spt = string.split(" ");
+	return spt[1] + "/" + spt[2] + "/" + spt[3] + " " + spt[4];
 }

@@ -4,7 +4,7 @@
 var express = require('express')
   , routes = require('./routes')
   , expressLayouts = require('express-ejs-layouts')
-//  , user = require('./routes/user')
+  , article = require('./routes/article')
   , http = require('http')
   , path = require('path')
   , env = require('./config/environment/local');
@@ -30,7 +30,9 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-//app.get('/users', user.list);
+app.get('/article/add', article.add);
+app.get('/article/result', article.result);
+app.get('/article/add_exec', article.add_exec);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("MikeTOKYO meets node.js server listening on port " + app.get('port'));

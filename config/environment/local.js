@@ -13,5 +13,5 @@ databse.add('mongo_master',{
 				adapter : 'mongo',
 				host : 'localhost',
 				dbName : 'maruoboe_eibun',
-				port : null
+				port : null,
 			});
