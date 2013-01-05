@@ -10,17 +10,19 @@ var _mongo = require('mongoose');
 /**
 * constructor
 */
-function mongoDriver(){
-	this._con = null
+/*function mongoDriver(){
+	this._con = null;
 	this._col = null;
-	this._schema = null;
 	this._collName = null;
-}
+}*/
 
 /**
-* methods, properties
+* Singleton Driver
 */
-mongoDriver.prototype = {
+mongoDriver = {
+	pool : {},
+	currentConnectKey : null,
+	//this._collName = null;
 	/**
 	* void init
 	*/
@@ -32,8 +34,13 @@ mongoDriver.prototype = {
 	*void createConnection
 	*/
 	createConnection : function(host, dbName, port){
+		this.currentConnectKey = host+dbName;
+		if(typeof(this.pool[host+dbName]) != "undefined"){
+			return;
+		}
+		this.pool[host+dbName] = {};
 		try{
-			this._con = _mongo.connect('mongodb://' + host + '/' + dbName);
+			this.pool[this.currentConnectKey]._con = _mongo.connect('mongodb://' + host + '/' + dbName);
 		}catch(e){
 			throw new Error("database connection error occured.");
 		}
@@ -43,16 +50,15 @@ mongoDriver.prototype = {
 	* object getCollection
 	*/
 	getCollection : function(colName, schema){
-		var Schema = this._con.Schema;
-		this._col = this._con.model(colName, new Schema(schema));
-		return this._col;
+		var Schema = this.pool[this.currentConnectKey]._con.Schema;
+		return this.pool[this.currentConnectKey]._con.model(colName, new Schema(schema));
 	},
 
 	/**
 	* object getDBConnection
 	*/
 	getConnection : function(){
-		return this._con;
+		return this.pool[this.currentConnectKey]._con;
 	}
 };
 

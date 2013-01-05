@@ -31,8 +31,8 @@ model.prototype = {
 		try{
 			var dbCnf = dbConf.get(connectionName);
 			var driverPath = "../../core/db/" + dbCnf.adapter + "Driver";
-			var driver = require(driverPath);
-			this.db = new driver();
+			//var driver = require(driverPath);
+			this.db = require(driverPath);//new driver();
 		}catch(e){
 			throw new Error("Driver not found Exception  : " + driverPath);
 		}

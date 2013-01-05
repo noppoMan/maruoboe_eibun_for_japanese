@@ -9,10 +9,10 @@ var Class = require("../../core/libraries/class");
 function category(){
 	this.connectionName = "mongo_master";
 	this.schema = {
-		categoryId : int,
-		name : String,
-		created : {type: Date, default: Date.now},
-		modified : {type: Date, default: Date.now}
+		categoryId : Number,
+		name : String
+		//created : {type: Date, default: Date.now},
+		//modified : {type: Date, default: Date.now}
 	}
 }
 var model = Class.modelInit(category);

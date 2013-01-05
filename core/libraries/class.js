@@ -32,6 +32,12 @@ exports.getExtendedInstance = function(subC, superC){
 * @param string colName
 * @param object schema
 */
+
+
+var cache = {
+	
+}
+
 exports.modelInit = function(subC, connectionName, colName, schema){
 	var model = this.getExtendedInstance(subC, require("../db/model"));
 	model.createConnection(connectionName);

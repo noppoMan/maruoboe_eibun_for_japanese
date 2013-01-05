@@ -1,6 +1,3 @@
-<% include ../header %>
-
-
 <!--start: Container -->
 <div class="container">
             
@@ -13,24 +10,33 @@
                 <div class="control-group">  
                     <label class="control-label" for="textarea">English Sentence</label>  
                     <div class="controls">  
-                        <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
-                        <span class="help-block">example：Is this a pen?</span>
+                        <textarea name="EnglishSentence" class="input-xlarge" id="textarea" rows="3" placeholder="Is this a pen ?"></textarea>
                     </div>  
                 </div>   
 
                 <div class="control-group">  
                     <label class="control-label" for="textarea">Japanese Sentence</label>  
                     <div class="controls">  
-                        <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
-                        <span class="help-block">example：これはペンですか？</span>
+                        <textarea name="JapaneseSentence" class="input-xlarge" id="textarea" rows="3" placeholder="これはペンですか？"></textarea>
                     </div>  
+                </div>
+
+                <div class="control-group"">
+                    <label class="control-label" for="textarea">Category</label>
+                    <div class="controls">
+                        <select name="normalSelect"
+                            id="normalSelect">
+                            <% for(var i = 0; i < categories.length; i++){ %>
+                                <option value="<%= categories[i].categoryId %>" ><%= categories[i].name %></option>
+                            <%}%>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="control-group">  
                     <label class="control-label" for="input01">Sound File URL</label>
                     <div class="controls"> 
-                        <input type="text" class="input-xlarge" id="input01">  
-                        <p class="help-block">http://miketokyo.com</p>
+                        <input name="SoundFileUrl" type="text" class="input-xlarge" id="input01" placeholder="http://miketokyo.com">
                     </div>  
                 </div>  
                 <div class="form-actions" style="background-color:#ccc;">
@@ -43,7 +49,4 @@
     <!--end: Container-->
 
 </div>
-<!-- end: Wrapper  -->          
-
-
-<% include ../footer %>
+<!-- end: Wrapper  --> 

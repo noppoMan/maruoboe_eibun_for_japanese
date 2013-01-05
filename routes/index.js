@@ -5,34 +5,10 @@
 
 exports.index = function(req, res){
 	var facadeArticle = require('../models/facades/facadeArticle');
-    //var mbSegmentetor = require('../core/libraries/mbSegmentetor');
-/*    var uf = require('../core/libraries/utils');
-    uf.async(
-        function(){
-
-        },
-        function(string, method, callBack){
-
-        },
-        function(callBack){
-
-        }
-    );
-*/
-
-    var serachWord = req.query.search_word;
-
     var options = {};
-    if(serachWord != undefined){
-        options.searchWord = serachWord;
-    }
-
-    //ms = new mbSegmentetor();
-    //ms.getResult2Katakana("これいくらですか？", function(result){
-            facadeArticle.getDocument(function(object){
-                res.render('index', {title:'Address Book', result : object.result});
-            }, options);
-    //});
+    facadeArticle.getList(function(result){
+        res.render('index', {title:'Address Book', result : result.articles});
+    }, options);
 
     /*
     var con = new article();

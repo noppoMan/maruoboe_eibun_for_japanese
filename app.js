@@ -4,10 +4,11 @@
 var express = require('express')
   , routes = require('./routes')
   , expressLayouts = require('express-ejs-layouts')
-  , article = require('./routes/article')
   , http = require('http')
   , path = require('path')
-  , env = require('./config/environment/local');
+  , env = require('./config/environment/local')
+  , article = require('./routes/article')
+  , search = require('./routes/search');
 
 var app = express();
 
@@ -33,6 +34,14 @@ app.get('/', routes.index);
 app.get('/article/add', article.add);
 app.get('/article/result', article.result);
 app.get('/article/add_exec', article.add_exec);
+app.get('/article/list', article.list);
+
+
+app.get('/search/scene', search.scene);
+app.get('/search/refine', search.refine);
+app.get('/search/search_exec', search.search_exec);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("MikeTOKYO meets node.js server listening on port " + app.get('port'));

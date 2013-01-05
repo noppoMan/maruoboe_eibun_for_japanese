@@ -1,28 +1,34 @@
+var sync = require("../../core/libraries/sync");
+var article = require("../dao/article");
+var mbSegmentetor = require('../../core/libraries/mbSegmentetor');
+
 var facadeArticle = {
-	getDocument : function(callBack, options){
-		if(typeof(arguments[1]) != "undefined"){
-			if(typeof(options) == "object" && options.length > 0){
+	getList : function(callBack, options){
 
-			}else{
+		var args = {fields : {}, conditions : {}, other : {limit : 10, sort : {modified: -1}}};
 
-			}
-		}else{
-			options = {fields : {}, conditions : {}, other : {limit : 10, sort : {modified: -1}}};
-		}		
+		if(options.category){
+			args.conditions.categoryId = options.category;
+		}
 
-		return (function(){
-			var article = require("../dao/article");
-			//if(options.length == 0){
-				article.find(options.conditions, options.fields, options.other,
-				function(err, result){
-					if(err){
-						throw new Error(err.toString());
-					}
-					var vars = {result : result}
-					callBack(vars);
-				});
-			//}
-		})();
+		var getArticle = function(next){
+			article.find(args.conditions,args.fields,args.other,
+					function(err, articles){
+						if(err){
+							throw new Error(err.toString());
+						}
+						sync.merge({articles : articles});
+						next();
+					});
+		}
+		var done = function(vars){
+			//console.log(vars);
+			callBack(vars);
+		}
+		sync.pipe([getArticle], done);
+	},
+	getCategory : function(){
+		
 	}
 }
 

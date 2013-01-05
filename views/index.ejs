@@ -1,6 +1,3 @@
-<% include header %>
-
-
 <!--start: Container -->
 <div class="container">
             
@@ -10,7 +7,7 @@
         <!-- start: Wall -->
         <div id="wall" class="row-fluid">
 
-
+        <% if (result.length > 0) { %>
         	<% for(var i = 0; i < result.length; i++){ %>
 	            <div class="span3 item">
 	                <div class="quotes">
@@ -22,15 +19,16 @@
 	                    <div class="author">
 	                        
 	                    </div>
-	                    -->
+	                    -->     
 	                    <div class="meta">
-	                        <span><i class="fa-icon-calendar"></i><%= helper.dateFormat(result[i].modified) %></span>
-                            <span><%- helper.link("article/edit", "Edit")%></span>
+	                        <span style="margin-left:5px;"><i class="fa-icon-calendar"></i><%= helper.dateFormat(result[i].modified) %></span>
+                            <span><i class="icon-pencil"></i><%- helper.link("article/edit", "Edit")%></span>
 	                        <!--<span><i class="fa-icon-heart-empty"></i> 88</span>-->
 	                    </div>
 	                </div>
 	            </div>
 			<%}%>
+        <% } %>
 
             <div class="span3 item">
                 <div class="quotes">
@@ -67,13 +65,7 @@
     <!--end: Container-->
 
 </div>
-<!-- end: Wrapper  -->          
-
-
-<% include footer %>
-
-
-
+<!-- end: Wrapper  --> 
 
 
 <!-- Le javascript
