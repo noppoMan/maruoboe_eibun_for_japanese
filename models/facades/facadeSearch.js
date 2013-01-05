@@ -4,7 +4,7 @@ var facadeSearch = {
 		var sync = require("../../core/libraries/sync");
 
 		var getCategory = function(next){
-			category.find(
+			category.find({}, {}, {sort: { categoryId: 'Ascending' }},
 					function(err, categories){
 						if(err){
 							throw new Error(err.toString());

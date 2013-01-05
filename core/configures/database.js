@@ -1,11 +1,13 @@
-var appConfig = {
+var database = {
 	config : {},
 	add : function(key, object){
 		this.config[key] = object;
 	},
 	get : function(key){
+		if(typeof(this.config[key]) == "undefined"){
+			return null;
+		}
 		return this.config[key]
 	}
-};
-appConfig.config.BASE_URL = "";
-module.exports = appConfig;
+}
+module.exports = database;

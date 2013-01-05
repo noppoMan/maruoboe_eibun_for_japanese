@@ -72,13 +72,33 @@
                     <span class="icon-bar"></span>
                 </a>
                 <%- helper.link("", "MaruoboeEibun JP", {class : "brand"})%>
+                <script>
+                /*
+                $(document).ready(function(){
+                    var list = $(".nav li")
+                    list.on("click", function(e){
+                        var i = list.index(this);
+                        window.localStorage.setItem("activeListOffset", i);
+                        if(e.currentTarget.className == "dropdown-menu"){
+                            //$(".nav li:nth-child(" + (i + 1) + ")").parent().addClass("active");
+                            return;
+                        }
+                    })
+                    var num = window.localStorage.getItem("activeListOffset");
+                    var index = 0;
+                    if(num != null){
+                        index = parseInt(num) + 1;
+                    }
+                    $(".nav li:nth-child(" + index + ")").addClass("active");
+                })*/
+                </script>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li class="active"><%- helper.link("", "Home") %></li>
+                        <li><%- helper.link("", "Home") %></li>
+                        <li ><%- helper.link("search/scene", "Scene") %></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li ><%- helper.link("search/scene", "Scene") %></li>
                                 <li ><%- helper.link("article/refine", "Refine") %></li>
                             </ul>
                         </li>
@@ -89,8 +109,8 @@
                                 <!--<li ><%- helper.link("article/edit", "Edit") %></li>-->
                             </ul>
                         </li>
-                        <li ><%- helper.link("about", "About") %></li>
-                        <li ><a href="contact.html">Contact</a></li>
+                        <li ><%- helper.link("official/about", "About") %></li>
+                        <li ><a href="mailto:info@miketokyo.com">Contact</a></li>
                     </ul>
                 </div>
             </div>

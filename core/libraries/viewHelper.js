@@ -1,4 +1,4 @@
-var appConfig = require("../../config/appConfig");
+var configure = require("../../core/configures/configure");
 
 exports.link = function(path, innerHtml, options){
 	var addInfo = "";
@@ -7,7 +7,7 @@ exports.link = function(path, innerHtml, options){
 			addInfo += key + "='" + options[key] + "' ";
 		}
 	}
-	return "<a href='" + appConfig.get("BASE_URL") + path + "'" + addInfo +">" + innerHtml + "</a>";
+	return "<a href='" + configure.get("BASE_URL") + path + "'" + addInfo +">" + innerHtml + "</a>";
 }
 
 
@@ -21,13 +21,13 @@ exports.loader = function(type, path, options){
 	}
 	switch(type){
 		case "img" :
-			tag = "<img src='" + appConfig.get("BASE_URL") + "images" + "/" + path + "' " + addInfo + ">";
+			tag = "<img src='" + configure.get("BASE_URL") + "images" + "/" + path + "' " + addInfo + ">";
 			break;
 		case "css" : 
-			tag = "<link href='" + appConfig.get("BASE_URL")  + "stylesheets" + "/" + path + "' " + addInfo + ">";
+			tag = "<link href='" + configure.get("BASE_URL")  + "stylesheets" + "/" + path + "' " + addInfo + ">";
 			break;
 		case "js" :
-			tag = "<script src='" + appConfig.get("BASE_URL")  + "javascripts" + "/" + path + "' " + addInfo + "></script>";
+			tag = "<script src='" + configure.get("BASE_URL")  + "javascripts" + "/" + path + "' " + addInfo + "></script>";
 			break;
 	}
 	return tag;

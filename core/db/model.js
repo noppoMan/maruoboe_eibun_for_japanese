@@ -3,7 +3,7 @@
 * module dependencies
 */
 var Class = require("../../core/libraries/class");
-var dbConf = require("../../config/database");
+var dbConf = require("../../core/configures/database");
 var uf = require("../../core/libraries/utils");
 
 /**

@@ -6,8 +6,9 @@ var express = require('express')
   , expressLayouts = require('express-ejs-layouts')
   , http = require('http')
   , path = require('path')
-  , env = require('./config/environment/local')
   , article = require('./routes/article')
+  , official = require('./routes/official')
+  , httpRequest = require("./core/networks/httpRequest")
   , search = require('./routes/search');
 
 var app = express();
@@ -40,6 +41,9 @@ app.get('/article/list', article.list);
 app.get('/search/scene', search.scene);
 app.get('/search/refine', search.refine);
 app.get('/search/search_exec', search.search_exec);
+
+
+app.get('/official/about', official.about);
 
 
 

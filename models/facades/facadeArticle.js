@@ -27,8 +27,8 @@ var facadeArticle = {
 		}
 		sync.pipe([getArticle], done);
 	},
-	getCategory : function(){
-		
+	saveData : function(){
+		var ms = new mbSegmentetor();
 	}
 }
 
