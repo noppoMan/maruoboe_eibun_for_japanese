@@ -41,7 +41,7 @@ var cache = {
 exports.modelInit = function(subC, connectionName, colName, schema){
 	var model = this.getExtendedInstance(subC, require("../db/model"));
 	model.createConnection(connectionName);
-	return model.getCollection(colName, schema);
+	return model;
 }
 
 

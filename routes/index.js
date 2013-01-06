@@ -9,14 +9,4 @@ exports.index = function(req, res){
     facadeArticle.getList(function(result){
         res.render('index', {title:'Address Book', result : result.articles});
     }, options);
-
-    /*
-    var con = new article();
-    con.english = "test";
-    con.japanese = "テスト"
-    con.save(function(err) {
-        if(err) throw err;
-        res.render('index', {title:'Address Book'});
-    });
-	*/
 };

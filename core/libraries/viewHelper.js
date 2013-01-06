@@ -39,3 +39,11 @@ exports.dateFormat = function(date){
 	var spt = string.split(" ");
 	return spt[1] + "/" + spt[2] + "/" + spt[3] + " " + spt[4];
 }
+
+
+exports.toEmpty = function(string){
+  if(string == false || string == null){
+    return "";
+  }
+  return string;
+}

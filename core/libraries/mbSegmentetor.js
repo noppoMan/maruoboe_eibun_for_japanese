@@ -1,24 +1,26 @@
-function mbSegmentetor(lang){
+function mbSegmentetor(){
 	this.lang = "japanese";
 }
 
 
 mbSegmentetor.prototype = {
-	getResult : {
-		toKatakana : function(string, onCompleteFunc){
-			var uf = require("../libraries/utils");
-			this._stringSegmentExec(string, function(callBack){
-	            for(i in callBack){
-	                callBack[i] = uf.toKatakanaCase(callBack[i]);
-	            }
-	            onCompleteFunc(callBack);
-	        });
-		},
-		toHiragana : function(string, onCompleteFunc){
-			var uf = require("../libraries/utils");
-			this._stringSegmentExec(string, function(callBack){
-	            onCompleteFunc(callBack);
-	        });
+	getResult : function(){
+		return {
+			toKatakana : function(string, onCompleteFunc){
+				var uf = require("../libraries/utils");
+				mbSegmentetor.prototype._stringSegmentExec(string, function(callBack){
+		            for(i in callBack){
+		                callBack[i] = uf.toKatakanaCase(callBack[i]);
+		            }
+		            onCompleteFunc(callBack);
+		        });
+			},
+			toHiragana : function(string, onCompleteFunc){
+				var uf = require("../libraries/utils");
+				mbSegmentetor.prototype._stringSegmentExec(string, function(callBack){
+		            onCompleteFunc(callBack);
+		        });
+			}
 		}
 	},
 	_stringSegmentExec : function(string, onCompleteFunc){

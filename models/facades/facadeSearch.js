@@ -1,10 +1,12 @@
 var facadeSearch = {
 	getCategory : function(callBack, options){
 		var category = require("../dao/category");
-		var sync = require("../../core/libraries/sync");
+		var _sync = require("../../core/libraries/sync");
+
+		var sync = new _sync();
 
 		var getCategory = function(next){
-			category.find({}, {}, {sort: { categoryId: 'Ascending' }},
+			category.getCollection().find({}, {}, {sort: { categoryId: 'Ascending' }},
 					function(err, categories){
 						if(err){
 							throw new Error(err.toString());

@@ -12,7 +12,7 @@
 	                <div class="quotes">
 	                    <div class="quote">
 	                    Eng：<%= result[i].english %><br>
-	                    Jp：<%= result[i].japanese %>
+	                    <span style='font-size:0.7em;'>Jp：<%= result[i].japanese %></span>
 	                    </div>
 	                    <!--
 	                    <div class="author">
@@ -21,25 +21,13 @@
 	                    -->     
 	                    <div class="meta">
 	                        <span style="margin-left:5px;"><i class="fa-icon-calendar"></i><%= helper.dateFormat(result[i].modified) %></span>
-                            <span><i class="icon-pencil"></i><%- helper.link("article/edit", "Edit")%></span>
+                            <span><i class="icon-pencil"></i><%- helper.link("article/edit?articleId=" + result[i].id, "Edit")%></span>
 	                        <!--<span><i class="fa-icon-heart-empty"></i> 88</span>-->
 	                    </div>
 	                </div>
 	            </div>
 			<%}%>
         <% } %>
-
-            <div class="span3 item">
-                <div class="quotes">
-                    <div class="quote">
-                    “That’s not what we think design is. It’s not just what it looks like and feels like. Design is how it works”
-                    </div>
-                    <div class="author">
-                        - Steve Jobs -
-                    </div>
-                </div>
-            </div>
-
             <!--
             <div class="span3 item">
                 <div class="picture">
@@ -64,27 +52,7 @@
     <!--end: Container-->
 
 </div>
-<!-- end: Wrapper  --> 
-
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!--
-<%- helper.loader("js", "jquery.js") %>
-<%- helper.loader("js", "bootstrap-transition.js") %>
-<%- helper.loader("js", "bootstrap-alert.js") %>
-<%- helper.loader("js", "bootstrap-modal.js") %>
-<%- helper.loader("js", "bootstrap-dropdown.js") %>
-<%- helper.loader("js", "bootstrap-scrollspy.js") %>
-<%- helper.loader("js", "bootstrap-tab.js") %>
-<%- helper.loader("js", "bootstrap-tooltip.js") %>
-<%- helper.loader("js", "bootstrap-popover.js") %>
-<%- helper.loader("js", "bootstrap-button.js") %>
-<%- helper.loader("js", "bootstrap-collapse.js") %>
-<%- helper.loader("js", "bootstrap-carousel.js") %>
-<%- helper.loader("js", "bootstrap-typeahead.js") %>
--->
+<!-- end: Wrapper  -->
 
 
 

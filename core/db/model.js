@@ -12,11 +12,11 @@ var uf = require("../../core/libraries/utils");
 function model(){
 	this.connectionName = null;
 	this.db = null;
-	this.cacheCollections = {};
 	this._colName = null;
 }
 
 model.prototype = {
+	cacheCollections : {},
 	createConnection : function(connectionName){
 
 		if(uf.isset(this.connectionName)){
@@ -48,22 +48,17 @@ model.prototype = {
 		if(!uf.isset(schema)){
 			schema = this.schema;
 		}
-
-		/*
-		if(uf.inArray(this.cacheCollections, colName)){
+		if(typeof(this.cacheCollections[colName]) != "undefined"){
 			return this.cacheCollections[colName];
 		}
-		スキーマobjectをキャッシュする
 		this.cacheCollections[colName] = this.db.getCollection(colName, schema);
-		*/
-
-		var col = this.db.getCollection(colName, schema);
-
-		//動的メソッド追加関数
-		col.addMethod = function(methodName, logic){
-			eval("col." + methodName + "=" + logic);
-		}
-		return col;
+		return this.cacheCollections[colName];
+	},
+	getDriveInstance : function(){
+		return this.db;
+	},
+	addMethod : function(methodName, logic){
+		this[methodName] = logic;
 	}
 }
 

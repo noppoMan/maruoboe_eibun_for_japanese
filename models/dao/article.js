@@ -9,21 +9,17 @@ var Class = require("../../core/libraries/class");
 function article(){
 	this.connectionName = "mongo_master";
 	this.schema = {
+		id : Number,
 		english : String,
 		japanese : String,
+		japaneseFullTextSearch : Array,
+		categoryId : Number,
 		soundFilePath : String,
 		created : {type: Date, default: Date.now},
 		modified : {type: Date, default: Date.now}
 	}
 }
 var model = Class.modelInit(article);
-
-//method
-model.addMethod("test", function(){
-	//thisの参照は、modelクラスobjectである
-	console.log(this);
-	console.log("tinpo");
-});
 
 
 
