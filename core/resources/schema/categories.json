@@ -1,0 +1,7 @@
+{ "_id" : { "$oid" : "50e789ad5ef948bd97d756c2" }, "categoryId" : 4, "name" : "便利系" }
+{ "_id" : { "$oid" : "50e789b65ef948bd97d756c3" }, "categoryId" : 2, "name" : "タクシーで" }
+{ "_id" : { "$oid" : "50e789ba5ef948bd97d756c4" }, "categoryId" : 3, "name" : "カフェで" }
+{ "_id" : { "$oid" : "50e78a485ef948bd97d756c6" }, "categoryId" : 1, "name" : "あいさつ関連" }
+{ "_id" : { "$oid" : "50e78a6d5ef948bd97d756c7" }, "categoryId" : 5, "name" : "服屋さんで" }
+{ "_id" : { "$oid" : "50e78a855ef948bd97d756c8" }, "categoryId" : 6, "name" : "オフィスで" }
+{ "_id" : { "$oid" : "50e78ba25ef948bd97d756cd" }, "categoryId" : 7, "name" : "スーパーやコンビニで" }

@@ -23,7 +23,6 @@ var facadeArticle = {
 					});
 		}
 		var done = function(vars){
-			//console.log(vars);
 			callBack(vars);
 		}
 		sync.pipe([getArticle], done);

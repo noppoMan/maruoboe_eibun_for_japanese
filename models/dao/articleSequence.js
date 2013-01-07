@@ -30,23 +30,7 @@ model.addMethod("increment", function(callBack){
 				callBack(id);
 			});
 		});
-
-	/*
-	var o = model.getCollection();
-    var con = new o();
-    con.sequence = 1;
-    con.save(function(err) {
-        if(err) throw err;
-        //res.render('index', {title:'Address Book'});
-    });
-*/
-
-
 });
-
-
-console.log(model);
-
 
 //モジュール登録
 module.exports = model;

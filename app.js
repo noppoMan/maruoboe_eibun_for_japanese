@@ -40,6 +40,7 @@ app.get('/', routes.index);
 require("./core/autoRouting").getSet(rc.get, app);
 require("./core/autoRouting").postSet(rc.post, app);
 
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("MikeTOKYO meets node.js server listening on port " + app.get('port'));
 });
