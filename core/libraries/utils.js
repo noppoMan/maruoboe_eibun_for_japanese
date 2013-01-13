@@ -48,24 +48,3 @@ exports.toKatakanaCase = function(string){
     };
     return String.fromCharCode.apply(null, a);
 };
-
-
-
-/*exports.async = function(){
-	var calBack = null;
-	for(var i = 0; i < arguments.length; i++){
-		if(arguments[i])
-		calBack = arguments();
-	}
-}*/
-
-
-/*async(
-	function(string){
-		var a;
-	}
-	,function(integer){
-		var b;
-	}
-);
-*/

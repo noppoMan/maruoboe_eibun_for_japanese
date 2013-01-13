@@ -1,6 +1,6 @@
 /*********************************************
 * class.js
-* use for like a clasBase oop programing.
+* use to like a clasBase oop programing.
 **********************************************/
 
 /**
@@ -14,6 +14,7 @@ exports.extend = function(subC, superC){
 	return subC;
 }
 
+
 /**
 * object getExtendedInstance
 * @param function subC
@@ -25,6 +26,7 @@ exports.getExtendedInstance = function(subC, superC){
 	return new subC();
 }
 
+
 /**
 * object modelInit
 * @param function subC
@@ -32,25 +34,8 @@ exports.getExtendedInstance = function(subC, superC){
 * @param string colName
 * @param object schema
 */
-
-
-var cache = {
-	
-}
-
 exports.modelInit = function(subC, connectionName, colName, schema){
 	var model = this.getExtendedInstance(subC, require("../db/model"));
 	model.createConnection(connectionName);
 	return model;
-}
-
-
-exports.addMethod = function(leftSide, rightSide){
-	eval(leftSide + "=" + rightSide);
-}
-
-
-
-exports.moduleInit = function(path){
-	return new path;
 }

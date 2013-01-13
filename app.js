@@ -1,6 +1,3 @@
-
-
-
 /**
  * Module dependencies.
  */
@@ -11,10 +8,7 @@ var express = require('express')
   , path = require('path')
   , rc = require("./config/routing")
   , httpRequest = require("./core/networks/httpRequest");
-  /*, article = require('./routes/article')
-  , official = require('./routes/official')
-  , search = require('./routes/search');
-  */
+
 
 var app = express();
 
@@ -40,18 +34,24 @@ app.get('/', routes.index);
 require("./core/autoRouting").getSet(rc.get, app);
 require("./core/autoRouting").postSet(rc.post, app);
 
-
-http.createServer(app).listen(app.get('port'), function(){
+//httpサーバー
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log("MikeTOKYO meets node.js server listening on port " + app.get('port'));
 });
 
 
+//socket.ioのインスタンス作成
+var io = require('socket.io').listen(server);
 
-
-
-
-
-
-
-
-
+//クライアントから接続があった時
+io.sockets.on('connection',function(socket){
+  //クライアントからmessageイベントが受信した時
+  socket.on('message',function(data){
+    //念のためdataの値が正しいかチェック
+    if(data && typeof data.text === 'string'){
+      //メッセージを投げたクライアント以外全てのクライアントにメッセージを送信する。
+      socket.broadcast.json.emit('message',{text:data.text});
+    }
+  });
+});

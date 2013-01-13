@@ -21,13 +21,16 @@ exports.loader = function(type, path, options){
 	}
 	switch(type){
 		case "img" :
-			tag = "<img src='" + configure.get("BASE_URL") + "images" + "/" + path + "' " + addInfo + ">";
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") + "images" + "/" + path;
+			tag = "<img src='" + url + "' " + addInfo + ">";
 			break;
 		case "css" : 
-			tag = "<link href='" + configure.get("BASE_URL")  + "stylesheets" + "/" + path + "' " + addInfo + ">";
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL")  + "stylesheets" + "/" + path;
+			tag = "<link href='" + url + "' " + addInfo + ">";
 			break;
 		case "js" :
-			tag = "<script src='" + configure.get("BASE_URL")  + "javascripts" + "/" + path + "' " + addInfo + "></script>";
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL")  + "javascripts" + "/" + path;
+			tag = "<script src='" + url + "' " + addInfo + "></script>";
 			break;
 	}
 	return tag;

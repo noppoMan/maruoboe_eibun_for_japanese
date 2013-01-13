@@ -1,4 +1,4 @@
-function mbSegmentetor(){
+function mbSegmentetor(lang){
 	this.lang = "japanese";
 }
 
@@ -7,16 +7,15 @@ mbSegmentetor.prototype = {
 	getResult : function(){
 		return {
 			toKatakana : function(string, onCompleteFunc){
-				var uf = require("../libraries/utils");
+				var ut = require("../libraries/utils");
 				mbSegmentetor.prototype._stringSegmentExec(string, function(callBack){
 		            for(i in callBack){
-		                callBack[i] = uf.toKatakanaCase(callBack[i]);
+		                callBack[i] = ut.toKatakanaCase(callBack[i]);
 		            }
 		            onCompleteFunc(callBack);
 		        });
 			},
 			toHiragana : function(string, onCompleteFunc){
-				var uf = require("../libraries/utils");
 				mbSegmentetor.prototype._stringSegmentExec(string, function(callBack){
 		            onCompleteFunc(callBack);
 		        });
@@ -32,7 +31,15 @@ mbSegmentetor.prototype = {
 	    dic.forEach(function(line){
 	        cnt++;
 	        var match = eval("string.match(/" +line + "/gi)");
-	        if(match){
+
+	        //改行コードを含んでいるか
+	        var isLineEndStyle = function(string){
+	        	if(string == "\r" || string == "\n\r" || string == "\n"){
+	        		return true;
+	        	}
+	        	return false;
+	        }
+	        if(match  && !isLineEndStyle(match[0])){
 	            match = match[0];
 	            callBack.push(match);
 	            string = eval("string.replace(/\\" + match + "/g, '<%>')");
