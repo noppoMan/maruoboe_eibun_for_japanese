@@ -61,7 +61,7 @@
     	//サーバーにemit
     	keyword.on("keyup", function(e){
     		if(this.value != "" && val !=　this.value){
-    			socket.emit('search',{text:this.value});
+    			socket.emit('search',{text:this.value, env : "<%= config.get('ENV') %>"});
     			val = this.value;
     			serarchResult.css("display", "block");
     			serarchResult.html("");

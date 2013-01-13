@@ -54,7 +54,12 @@ var io = require('socket.io').listen(server),
     socket.on('search',function(data){
       if(data && typeof data.text === 'string'){
         //メッセージを投げたクライアント以外全てのクライアントにメッセージを送信する。        
-        require("./config/socket.io.bootstrap").init();
+
+        if(typeof(data.env) != "string"){
+          data.env = null;
+        }
+
+        require("./config/socket.io.bootstrap").init(data.env);
 
         var article = require("./models/dao/article");
 
