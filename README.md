@@ -21,6 +21,7 @@ software
 
 node_modeuls
 --express
+--express-ejs-layouts
 --ejs
 --mongoose
 --socket.io
@@ -30,6 +31,6 @@ If you know more detail about the instllation, please access url below.<br />
 https://github.com/noppoMan/maruoboe_eibun_for_japanese/wiki
 
 
-Thank you and Enjoy your development！
+Thank you and Enjoy your learning！
 
 Team MikeTOKYO meets node.js
