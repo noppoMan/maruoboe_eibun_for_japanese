@@ -8,12 +8,31 @@ var facadeArticle = {
 		var sync = new _sync();
 		var args = {fields : {}, conditions : {}, other : {limit : 20, sort : {modified: -1}}};
 
-		if(options.category){
-			args.conditions.categoryId = options.category;
+
+		var whereCreate = function(next){
+			if(options.keyword){
+				var ms = new mbSegmentetor();
+				ms.getResult().toKatakana(options.keyword, function(callBack){
+					var or = {$or : new Array()}
+					var cnt = 0;
+					for(key in callBack){
+						or['$or'][cnt] = {japaneseFullTextSearch : callBack[key]};
+						cnt++;
+					}
+					sync.merge({conditions : or});
+					next();
+				});
+			}else if(options.category){
+				args.conditions.categoryId = options.category;
+				sync.merge({conditions : args.conditions});
+				next();
+			}else{
+				next();
+			}
 		}
 
 		var getArticle = function(next){
-			article.getCollection().find(args.conditions,args.fields,args.other,
+			article.getCollection().find(sync.getVars('conditions'), args.fields,args.other,
 					function(err, articles){
 						if(err){
 							throw new Error(err.toString());
@@ -25,7 +44,7 @@ var facadeArticle = {
 		var done = function(vars){
 			callBack(vars);
 		}
-		sync.pipe([getArticle], done);
+		sync.pipe([whereCreate, getArticle], done);
 	},
 	saveData : function(callBack, options){
 

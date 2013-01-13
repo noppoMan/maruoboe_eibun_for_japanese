@@ -67,7 +67,7 @@ exports.result = function(req, res){
 exports.list = function(req, res){
 	var facadeArticle = require('../models/facades/facadeArticle');
     var options = {};
-    options.searchWord = getReq(req.query.search_word);
+    options.keyword = getReq(req.query.keyword);
     options.category  = getReq(req.query.category);
     facadeArticle.getList(function(result){
         res.render('index', {result : result.articles});

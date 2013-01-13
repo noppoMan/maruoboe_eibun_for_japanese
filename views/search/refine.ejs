@@ -1,1 +1,88 @@
+<script src="/socket.io/socket.io.js"></script>
 <%- helper.loader("js", "client.js") %>
+
+
+<style>
+
+#serarchResult {
+	display : none;
+	background-color: #fff;
+	margin-top : -11px;
+    margin-left : 1px;
+    position : relative;
+	z-index : 1;
+	-webkit-box-shadow: 0px 1px 2px #404040;
+}
+
+#serarchResult li {
+	/*border-bottom : solid 1px;*/
+}
+</style>
+
+<!--start: Container -->
+<div class="container">
+            
+    <!--start: Wrapper-->
+    <div id="wrapper">
+
+        <legend>Search by keywords</legend>
+
+        <form action="<%= config.get('BASE_URL')%>article/list" method="GET">
+			<div class="control-group">  
+	            <label class="control-label" for="textarea">input keywords</label>
+	            <div class="controls">
+	                <input id="keyword" name="keyword" type="text" autocomplete="off" x-webkit-speech>
+	                <ul id="serarchResult">
+	               </ul>
+	            </div>
+	        </div>
+            <button type="submit" class="btn btn-primary">Go</button>
+        </form>
+    </div>
+    <!--end: Container-->
+
+    <script>
+    //websocket
+    var socket = io.connect('http://'+location.host+'/');
+
+    $(document).ready(function(){
+    	//documentをキャッシュする
+    	var serarchResult = $("#serarchResult");
+    	var val = "";
+    	var keyword = $("#keyword");
+
+
+    	serarchResult.css({
+    						width : keyword.width()
+    					});
+
+    	//console.log(keyword.height());
+
+    	//サーバーにemit
+    	keyword.on("keyup", function(e){
+    		if(this.value != "" && val !=　this.value){
+    			socket.emit('search',{text:this.value});
+    			val = this.value;
+    			serarchResult.css("display", "block");
+    			serarchResult.html("");
+    		}
+    	});
+
+    	//サーバーから受け取る
+    	socket.on('search',function(data){
+    		var append = "";
+    		for(key in data){
+    			append += "<a class='resultItem' hfre='javascript:void(0);'><li>" + data[key].japanese + "</li></a>";
+    		}
+    		serarchResult.html(append);
+    		$(".resultItem").on("click", function(e){
+    			serarchResult.css("display", "none");
+		    	keyword.val(e.currentTarget.childNodes[0].innerHTML);
+			});
+    	});
+    });
+
+    </script>
+
+</div>
+<!-- end: Wrapper  --> 

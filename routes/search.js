@@ -6,7 +6,7 @@ exports.scene = function(req, res){
 }
 
 exports.refine = function(req, res){
-	res.render('official/under_construction');
+	res.render('search/refine');
 }
 
 exports.search_exec = function(req, res){

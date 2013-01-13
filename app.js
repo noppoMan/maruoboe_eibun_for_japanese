@@ -42,16 +42,30 @@ server.listen(app.get('port'), function(){
 
 
 //socket.ioのインスタンス作成
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server),
+    ut = require("./core/libraries/utils");
+//require("models/socket.io/search").exec(io);
 
-//クライアントから接続があった時
-io.sockets.on('connection',function(socket){
-  //クライアントからmessageイベントが受信した時
-  socket.on('message',function(data){
-    //念のためdataの値が正しいかチェック
-    if(data && typeof data.text === 'string'){
-      //メッセージを投げたクライアント以外全てのクライアントにメッセージを送信する。
-      socket.broadcast.json.emit('message',{text:data.text});
-    }
-  });
-});
+
+
+  io.sockets.on('connection',function(socket){
+    //クライアントからmessageイベントが受信した時
+    //console.log(socket);
+    socket.on('search',function(data){
+      if(data && typeof data.text === 'string'){
+        //メッセージを投げたクライアント以外全てのクライアントにメッセージを送信する。        
+        require("./config/socket.io.bootstrap").init();
+
+        var article = require("./models/dao/article");
+
+        article.getCollection().find({japaneseFullTextSearch : ut.toKatakanaCase(data.text)}, function(err, articles){
+          if(err){
+            throw new Error(err.toString());
+          }
+          socket.emit("search", articles);
+        });
+        //socket.broadcast.json.emit('message',{text:data.text});
+      }
+    });
+
+  }); 
