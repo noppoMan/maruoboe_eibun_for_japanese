@@ -7,7 +7,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , rc = require("./config/routing")
-  , httpRequest = require("./core/networks/httpRequest");
+  , httpRequest = require("./core/networks/httpRequest")
+  , configure = require("./core/configures/configure");
 
 
 var app = express();
@@ -39,38 +40,10 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log("MikeTOKYO meets node.js server listening on port " + app.get('port'));
 });
-
+configure.add("port", app.get('port'));
 
 //socket.ioのインスタンス作成
-var io = require('socket.io').listen(server),
-    ut = require("./core/libraries/utils");
-//require("models/socket.io/search").exec(io);
+var io = require('socket.io').listen(server);
 
-
-
-  io.sockets.on('connection',function(socket){
-    //クライアントからmessageイベントが受信した時
-    //console.log(socket);
-    socket.on('search',function(data){
-      if(data && typeof data.text === 'string'){
-        //メッセージを投げたクライアント以外全てのクライアントにメッセージを送信する。        
-
-        if(typeof(data.env) != "string"){
-          data.env = null;
-        }
-
-        require("./config/socket.io.bootstrap").init(data.env);
-
-        var article = require("./models/dao/article");
-
-        article.getCollection().find({japaneseFullTextSearch : ut.toKatakanaCase(data.text)}, function(err, articles){
-          if(err){
-            throw new Error(err.toString());
-          }
-          socket.emit("search", articles);
-        });
-        //socket.broadcast.json.emit('message',{text:data.text});
-      }
-    });
-
-  }); 
+//websocket
+require("./models/socket.io/search").apply(io);

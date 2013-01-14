@@ -8,6 +8,7 @@
 <%- helper.loader("css", "bootstrap-responsive.min.css", {rel : "stylesheet", type : "text/css"}) %>
 <%- helper.loader("css", "style.css", {rel : "stylesheet", type : "text/css"}) %>
 <%- helper.loader("css", "layerslider.css", {rel : "stylesheet", type : "text/css"}) %>
+<%- helper.loader("css", "costum.css", {rel : "stylesheet", type : "text/css"}) %>
 
 <!--[if lt IE 9 ]>
   <link href="css/styleIE.css" rel="stylesheet">
@@ -73,26 +74,7 @@
                 </a>
 
                 <%- helper.link("", "MaruoboeEibun JP", {class : "brand"})%>
-                <script>
-                /*
-                $(document).ready(function(){
-                    var list = $(".nav li")
-                    list.on("click", function(e){
-                        var i = list.index(this);
-                        window.localStorage.setItem("activeListOffset", i);
-                        if(e.currentTarget.className == "dropdown-menu"){
-                            //$(".nav li:nth-child(" + (i + 1) + ")").parent().addClass("active");
-                            return;
-                        }
-                    })
-                    var num = window.localStorage.getItem("activeListOffset");
-                    var index = 0;
-                    if(num != null){
-                        index = parseInt(num) + 1;
-                    }
-                    $(".nav li:nth-child(" + index + ")").addClass("active");
-                })*/
-                </script>
+                
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li><%- helper.link("", "Home") %></li>

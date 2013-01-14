@@ -1,23 +1,5 @@
-<script src="/socket.io/socket.io.js"></script>
+<script src="<%=config.get('NODE_WORK_URL')%>socket.io/socket.io.js"></script>
 <%- helper.loader("js", "client.js") %>
-
-
-<style>
-
-#serarchResult {
-	display : none;
-	background-color: #fff;
-	margin-top : -11px;
-    margin-left : 1px;
-    position : relative;
-	z-index : 1;
-	-webkit-box-shadow: 0px 1px 2px #404040;
-}
-
-#serarchResult li {
-	/*border-bottom : solid 1px;*/
-}
-</style>
 
 <!--start: Container -->
 <div class="container">
@@ -43,7 +25,7 @@
 
     <script>
     //websocket
-    var socket = io.connect('http://'+location.host+'/');
+    var socket = io.connect('http://'+location.host, {port : <%= config.get("websocketsProxyPort")%>});
 
     $(document).ready(function(){
     	//documentをキャッシュする
@@ -51,14 +33,9 @@
     	var val = "";
     	var keyword = $("#keyword");
 
+    	serarchResult.css({width : keyword.width()});
 
-    	serarchResult.css({
-    						width : keyword.width()
-    					});
-
-    	//console.log(keyword.height());
-
-    	//サーバーにemit
+    	//サーバーに送る
     	keyword.on("keyup", function(e){
     		if(this.value != "" && val !=　this.value){
     			socket.emit('search',{text:this.value, env : "<%= config.get('ENV') %>"});
