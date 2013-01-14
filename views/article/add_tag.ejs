@@ -16,7 +16,7 @@
 	                <input id="tag" name="keyword" type="text" autocomplete="off" x-webkit-speech><div id="state"></div>
 	                <ul id="tagList">
                         <% for(key in tags){%>
-                            <%= tags[key].name%>
+                            <span class='inputedTags'><%= tags[key].name%></span>
                         <% }%>
                     </ul>
 	            </div>
@@ -55,7 +55,7 @@
     	//サーバーから受け取る
     	socket.on('tagsave',function(data){
             if(data.state == 1){
-                tagList.html(data.tag + tagList.html());
+                tagList.html("<span class='inputedTags'>" + data.tag + "</span>" + tagList.html());
                 tagF.val("");
             }else if(data.state == 2){
                 alert("すでに登録されています");

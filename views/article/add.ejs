@@ -1,23 +1,3 @@
-<style>
-.selectedTag {
-    font-size:1.4em;
-    color:#fff;
-    background-color: #00c060;
-    -webkit-border-top-left-radius: 3px; 
-    -webkit-border-bottom-left-radius: 3px; 
-}
-.removeTag{
-    font-size:1.4em;
-    color:#fff;
-    width:20px;
-    border-left : solid 1px #fff;
-    background-color: #00c060;
-    -webkit-border-top-right-radius: 3px; 
-    -webkit-border-bottom-right-radius: 3px; 
-    margin-right:5px;
-}
-</style>
-
 <script src="<%=config.get('NODE_WORK_URL')%>socket.io/socket.io.js"></script>
 <!--start: Container -->
 <div class="container">
@@ -77,7 +57,12 @@
                         <input value="<%= helper.toEmpty(formValues.soundFileUrl)%>" name="tag" type="text" class="input-xlarge" id="tag" placeholder="タグ" onKeyPress="return submitStop(event);">
                         <ul id="useTagList">
                             <% if(formValues.tags != ""){ %>
-                                <% var tags = formValues.tags.toString().split(",") %>
+                                <% 
+                                    var tags = "";
+                                    if(typeof(formValues.tags) == "object"){
+                                        tags = formValues.tags.toString().split(",");
+                                    }
+                                %>
                                 <% for(i in tags){ %>
                                     <span>
                                         <span class='selectedTag'><%= tags[i] %></span><a class='removeTagAnk' href='javascript:void(0);'><span class='removeTag'>×</span></a>

@@ -32,3 +32,29 @@
     border-radius: 4px;
     text-shadow: 1px 1px 2px rgba(0,0,0,.5);
 }
+
+.inputedTags{
+    font-size:1.3em;
+    color:#fff;
+    background-color: #00c060;
+    -webkit-border-radius: 3px; 
+    -webkit-border-radius: 3px; 
+}
+
+.selectedTag {
+    font-size:1.3em;
+    color:#fff;
+    background-color: #00c060;
+    -webkit-border-top-left-radius: 3px; 
+    -webkit-border-bottom-left-radius: 3px; 
+}
+.removeTag{
+    font-size:1.3em;
+    color:#fff;
+    width:20px;
+    border-left : solid 1px #fff;
+    background-color: #00c060;
+    -webkit-border-top-right-radius: 3px; 
+    -webkit-border-bottom-right-radius: 3px; 
+    margin-right:5px;
+}
