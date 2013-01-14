@@ -28,8 +28,7 @@ node_modeuls
 </pre>
 
 If you know more detail about the instllation, please access url below.<br />
-https://github.com/noppoMan/maruoboe_eibun_for_japanese/wiki
-
+https://github.com/noppoMan/maruoboe_eibun_for_japanese/wiki/Maruoboe-Eibun-for-Japanese-Documentation
 
 Thank you and Enjoy your learning！
 
