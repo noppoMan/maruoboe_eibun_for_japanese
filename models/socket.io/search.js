@@ -14,13 +14,13 @@ exports.apply = function(io){
 
         //環境設定ファイル読み込み
         if(data.env == "production"){
-          require('../../environment/production');
+          require('../../config/environment/production');
         }
         else if(data.env == "development"){
-          require('../../environment/development');
+          require('../../config/environment/development');
         }
         else{
-          require('../../environment/local');
+          require('../../config/environment/local');
         }
 
         var article = require("../../models/dao/article");
