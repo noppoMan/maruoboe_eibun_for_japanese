@@ -1,0 +1,78 @@
+<script src="<%=config.get('NODE_WORK_URL')%>socket.io/socket.io.js"></script>
+<%- helper.loader("js", "client.js") %>
+
+<!--start: Container -->
+<div class="container">
+            
+    <!--start: Wrapper-->
+    <div id="wrapper">
+
+        <legend>Add tags</legend>
+
+        <form action="<%= config.get('BASE_URL')%>article/list" method="GET">
+			<div class="control-group">  
+	            <label class="control-label" for="textarea">input tag</label>
+	            <div class="controls">
+	                <input id="tag" name="keyword" type="text" autocomplete="off" x-webkit-speech><div id="state"></div>
+	                <ul id="tagList">
+                        <% for(key in tags){%>
+                            <%= tags[key].name%>
+                        <% }%>
+                    </ul>
+	            </div>
+	        </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <!--end: Container-->
+
+    <script>
+    //websocket
+    var socket = io.connect('http://'+location.host, {port : <%= config.get("websocketsProxyPort")%>});
+
+    $(document).ready(function(){
+        var tagF = $("#tag");
+        var inputed = "";
+        tagF.on("keyup", function(e){
+            var k = e.keyCode;//console.log(e.keyCode);
+            var len = inputed.length;
+            //削除
+            if(tagF.val() == ""){
+                inputed = "";
+            }
+            if(k ==　8){
+                inputed = inputed.substring(0, len-1);
+            }else if(32 <= k && k <= 126){
+                var match = String.fromCharCode(k).toLowerCase().match(/[a-z]/);
+                if(match){
+                    inputed += String.fromCharCode(k).toLowerCase();
+                }
+            }
+        });
+
+        var stateE = $("#state");
+        var tagList = $("#tagList");
+    	//サーバーから受け取る
+    	socket.on('tagsave',function(data){
+            if(data.state == 1){
+                tagList.html(data.tag + tagList.html());
+                tagF.val("");
+            }else if(data.state == 2){
+                alert("すでに登録されています");
+            }
+    	});
+
+        $("form").submit(function(e){
+            e.preventDefault();
+            var tag = e.currentTarget.tag.value;
+            if(tag ==　""){
+                return;
+            }
+            socket.emit('tagsave',{text:tag, chars:inputed , env : "<%= config.get('ENV') %>"});
+        });
+
+    });
+    </script>
+
+</div>
+<!-- end: Wrapper  --> 

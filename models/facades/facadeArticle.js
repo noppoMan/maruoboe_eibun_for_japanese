@@ -92,6 +92,15 @@ var facadeArticle = {
 				var save = function(next){
 					var articleSequence = require("../dao/articleSequence");
 					
+					var tags = new Array();
+					if(options.tags != "" && options.tags != false){
+						var sep = options.tags.split(",");
+						for(i in sep){
+							if(sep[i] != ""){
+								tags.push(sep[i]);
+							}
+						}
+					}
 
 					if(options.mode == "update"){
 						try{
@@ -99,6 +108,7 @@ var facadeArticle = {
 								english : options.englishSentence,
 								japanese : options.japaneseSentence,
 								japaneseFullTextSearch : sync.getVars("segmented"),
+								tags : tags,
 								soundFilePath : options.soundFileUrl,
 								categoryId : options.category
 							}
@@ -122,6 +132,7 @@ var facadeArticle = {
 								con.english = options.englishSentence;
 								con.japanese = options.japaneseSentence;
 								con.japaneseFullTextSearch = sync.getVars("segmented");//options.japaneseSentence;
+								con.tags = tags;
 								con.soundFilePath = options.soundFileUrl;
 								con.categoryId = options.category;
 								con.save(function(err) {
@@ -174,6 +185,7 @@ var facadeArticle = {
 					formValues.englishSentence = res.english;
 					formValues.japaneseSentence = res.japanese;
 					formValues.soundFileUrl = res.soundFilePath;
+					formValues.tags = res.tags;
 					formValues.category = res.categoryId;
 
 					var facadeSearch = require('./facadeSearch');
@@ -182,6 +194,18 @@ var facadeArticle = {
 					});
 				});
 		}
+	},
+	getTag : function(callBack, options){
+		var errors = {};
+		var tag = require('../dao/tag');
+		tag.getCollection().find({}, {}, {limit : 100, sort : {modified: -1}}, function(err, res){
+			if(err){
+				throw new Error(err.toString());
+			}
+			callBack({hasError : false, result : res});
+		});
 	}
 }
+
+
 module.exports = facadeArticle;

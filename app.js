@@ -47,3 +47,4 @@ var io = require('socket.io').listen(server);
 
 //websocket
 require("./models/socket.io/search").apply(io);
+require("./models/socket.io/tag").apply(io);

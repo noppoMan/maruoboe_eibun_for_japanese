@@ -1,3 +1,24 @@
+<style>
+.selectedTag {
+    font-size:1.4em;
+    color:#fff;
+    background-color: #00c060;
+    -webkit-border-top-left-radius: 3px; 
+    -webkit-border-bottom-left-radius: 3px; 
+}
+.removeTag{
+    font-size:1.4em;
+    color:#fff;
+    width:20px;
+    border-left : solid 1px #fff;
+    background-color: #00c060;
+    -webkit-border-top-right-radius: 3px; 
+    -webkit-border-bottom-right-radius: 3px; 
+    margin-right:5px;
+}
+</style>
+
+<script src="<%=config.get('NODE_WORK_URL')%>socket.io/socket.io.js"></script>
 <!--start: Container -->
 <div class="container">
             
@@ -51,11 +72,33 @@
                 </div>
 
                 <div class="control-group">  
+                    <label class="control-label" for="input01">Tags</label>
+                    <div class="controls"> 
+                        <input value="<%= helper.toEmpty(formValues.soundFileUrl)%>" name="tag" type="text" class="input-xlarge" id="tag" placeholder="タグ" onKeyPress="return submitStop(event);">
+                        <ul id="useTagList">
+                            <% if(formValues.tags != ""){ %>
+                                <% var tags = formValues.tags.toString().split(",") %>
+                                <% for(i in tags){ %>
+                                    <span>
+                                        <span class='selectedTag'><%= tags[i] %></span><a class='removeTagAnk' href='javascript:void(0);'><span class='removeTag'>×</span></a>
+                                    </span>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                        <ul id="serarchResult"></ul>
+                    </div>  
+                </div>
+
+                <div class="control-group">  
                     <label class="control-label" for="input01">Sound File URL</label>
                     <div class="controls"> 
-                        <input value="<%= helper.toEmpty(formValues.soundFileUrl)%>" name="soundFileUrl" type="text" class="input-xlarge" id="input01" placeholder="http://miketokyo.com">
+                        <input value="<%= helper.toEmpty(formValues.soundFileUrl)%>" name="soundFileUrl" type="text" class="input-xlarge" id="input01" placeholder="http://miketokyo.com" onKeyPress="return submitStop(event);">
                     </div>  
                 </div>  
+
+
+                <input type="hidden" id="tagvalues" name="tagvalues" value="<%= helper.toEmpty(formValues.tags)%>">
+
                 <input type="hidden" name="mode" value="<%= mode %>">
                 <% if(typeof(formValues.articleId) != "undefined") { %>
                     <input type="hidden" name="articleId" value="<%= formValues.articleId %>">
@@ -72,3 +115,93 @@
 
 </div>
 <!-- end: Wrapper  --> 
+
+
+<script>
+//websocket
+var socket = io.connect('http://'+location.host, {port : <%= config.get("websocketsProxyPort")%>});
+
+function submitStop(e){
+    if (!e) var e = window.event;
+ 
+    if(e.keyCode == 13)
+        return false;
+}
+
+$(document).ready(function(){
+    var tagF = $("#tag");
+    var inputed = "";
+    var serarchResult = $("#serarchResult");
+    var useTagList = $("#useTagList");
+    var tagvalues =　$("#tagvalues");
+
+    tagF.on("keyup", function(e){
+        var k = e.keyCode;//console.log(e.keyCode);
+        var len = inputed.length;
+        //削除
+        if(tagF.val() == ""){
+            inputed = "";
+        }
+        var isEmit = false;
+        if(k ==　8){
+            isEmit = true;
+            inputed = inputed.substring(0, len-1);
+        }else if(32 <= k && k <= 126){
+            var match = String.fromCharCode(k).toLowerCase().match(/[a-z]/);
+            if(match){
+                isEmit = true;
+                inputed += String.fromCharCode(k).toLowerCase();
+            }
+        }
+        if(isEmit){
+            socket.emit('tagsearch',{chars:inputed , env : "<%= config.get('ENV') %>"});
+            serarchResult.css("display", "block");
+            serarchResult.html("");
+        }
+    });
+
+    //タグを削除する
+    var remTag = function(){
+        $(".removeTagAnk").on('click', function(e){
+            var text = e.currentTarget.parentNode.childNodes[0].innerHTML;
+            var tagval = tagvalues.val().replace(text + ",", "");
+            tagvalues.val(tagval);
+            //削除
+            $(e.currentTarget.parentNode).remove();
+        });
+    }
+
+
+     socket.on('tagsearch',function(data){
+        var append = "";
+        for(key in data.tags){
+            append += "<a class='resultItem' hfre='javascript:void(0);'><li>" + data.tags[key].name + "</li></a>";
+        }
+        serarchResult.html(append);
+
+        $(".resultItem").on("click", function(e){
+
+            var text = e.currentTarget.parentNode.childNodes[0].innerHTML;
+            var sep = tagvalues.val().split(",");
+            for(i in sep){
+                if(sep[i] == e.currentTarget.childNodes[0].innerHTML){
+                    serarchResult.html("");
+                    return;
+                }
+            }
+
+            tagF.val("");
+            serarchResult.css("display", "none");
+            var input = e.currentTarget.childNodes[0].innerHTML;
+            var selectedTag = "<span><span class='selectedTag'>" + input + "</span><a class='removeTagAnk' href='javascript:void(0);'><span class='removeTag'>×</span></a></span>"
+            useTagList.append(selectedTag);
+            var currentTag = tagvalues.val();
+            tagvalues.val(input + "," + currentTag);
+            remTag();
+        });
+    });
+    remTag();
+});
+
+
+</script>

@@ -1,6 +1,7 @@
 exports.get = {
 	"/" : "routes.index",
 	"/article/add" : "article.add",
+	"/article/add_tag" : "article.add_tag",
 	"/article/edit" : "article.edit",
 	"/article/result" : "article.result",
 	"/article/list" : "article.list",

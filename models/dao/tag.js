@@ -6,21 +6,17 @@ var Class = require("../../core/libraries/class");
 /**
 * constructor
 */
-function article(){
+function tag(){
 	this.connectionName = "mongo_master";
 	this.schema = {
 		id : Number,
-		english : String,
-		japanese : String,
-		japaneseFullTextSearch : Array,
-		categoryId : Number,
-		tags : Array,
-		soundFilePath : String,
+		name : String,
+		chars : Array,
 		created : {type: Date, default: Date.now},
 		modified : {type: Date, default: Date.now}
 	}
 }
-var model = Class.modelInit(article);
+var model = Class.modelInit(tag);
 
 
 

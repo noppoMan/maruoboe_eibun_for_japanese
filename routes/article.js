@@ -30,6 +30,7 @@ exports.add = function(req, res){
     options.englishSentence = false;
     options.japaneseSentence = false;
     options.category = false;
+    options.tags = false;
     options.soundFileUrl = false;
     options.mode = false;
 
@@ -46,6 +47,7 @@ exports.save_exec = function(req, res){
     options.englishSentence = getReq(req.body.englishSentence);
     options.japaneseSentence = getReq(req.body.japaneseSentence);
     options.category = getReq(req.body.category);
+    options.tags = getReq(req.body.tagvalues);
     options.soundFileUrl = getReq(req.body.soundFileUrl);
     options.mode = getReq(req.body.mode);
     facadeArticle.saveData(function(result){
@@ -72,4 +74,12 @@ exports.list = function(req, res){
     facadeArticle.getList(function(result){
         res.render('index', {result : result.articles});
     }, options);
+}
+
+
+exports.add_tag = function(req, res){
+    var facadeArticle = require('../models/facades/facadeArticle');
+    facadeArticle.getTag(function(result){
+        res.render("article/add_tag", {tags : result.result});
+    });
 }
