@@ -147,9 +147,12 @@ $(document).ready(function(){
 
     //to empty recommend window when focus out.
     tagF.on('blur', function(){
-        serarchResult.html("");
+        var enp = function(){
+            serarchResult.html("");
+        }
+        setTimeout(enp, 300);
     });
-    
+
 
     //タグを削除する
     var remTag = function(){

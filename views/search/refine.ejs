@@ -47,7 +47,10 @@
 
             //to empty recommend window when focus out.
             keyword.on('blur', function(){
-                serarchResult.html("");
+                var enp = function(){
+                    serarchResult.html("");
+                }
+                setTimeout(enp, 300);
             });
 
         	//サーバーから受け取る
