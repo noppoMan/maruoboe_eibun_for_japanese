@@ -19,45 +19,64 @@
 	        </div>
             <button type="submit" class="btn btn-primary">Go</button>
         </form>
+
+
+        <legend>Search by Tags</legend>
+                <div class="control-group">  
+                    <label class="control-label" for="input01">Sound File URL</label>
+                    <div class="controls"> 
+                        <input value="<%= helper.toEmpty(formValues.soundFileUrl)%>" name="soundFileUrl" type="text" class="input-xlarge" id="input01" placeholder="http://miketokyo.com" onKeyPress="return submitStop(event);">
+                    </div>  
+                </div>  
+            <button type="submit" class="btn btn-primary">Go</button>
+        </form>
+
+
     </div>
     <!--end: Container-->
 
     <script>
-    //websocket
-    var socket = io.connect('http://'+location.host, {port : <%= config.get("websocketsProxyPort")%>});
+    (function(){
+        //websocket
+        var socket = io.connect('http://'+location.host, {port : <%= config.get("websocketsProxyPort")%>});
 
-    $(document).ready(function(){
-    	//documentをキャッシュする
-    	var serarchResult = $("#serarchResult");
-    	var val = "";
-    	var keyword = $("#keyword");
+        $(document).ready(function(){
+        	//documentをキャッシュする
+        	var serarchResult = $("#serarchResult");
+        	var val = "";
+        	var keyword = $("#keyword");
 
-    	serarchResult.css({width : keyword.width()});
+        	serarchResult.css({width : keyword.width()});
 
-    	//サーバーに送る
-    	keyword.on("keyup", function(e){
-    		if(this.value != "" && val !=　this.value){
-    			socket.emit('search',{text:this.value, env : "<%= config.get('ENV') %>"});
-    			val = this.value;
-    			serarchResult.css("display", "block");
-    			serarchResult.html("");
-    		}
-    	});
+        	//サーバーに送る
+        	keyword.on("keyup", function(e){
+        		if(this.value != "" && val !=　this.value){
+        			socket.emit('search',{text:this.value, env : "<%= config.get('ENV') %>"});
+        			val = this.value;
+        			serarchResult.css("display", "block");
+        			serarchResult.html("");
+        		}
+        	});
 
-    	//サーバーから受け取る
-    	socket.on('search',function(data){
-    		var append = "";
-    		for(key in data){
-    			append += "<a class='resultItem' hfre='javascript:void(0);'><li>" + data[key].japanese + "</li></a>";
-    		}
-    		serarchResult.html(append);
-    		$(".resultItem").on("click", function(e){
-    			serarchResult.css("display", "none");
-		    	keyword.val(e.currentTarget.childNodes[0].innerHTML);
-			});
-    	});
-    });
+            //to empty recommend window when focus out.
+            keyword.on('blur', function(){
+                serarchResult.html("");
+            });
 
+        	//サーバーから受け取る
+        	socket.on('search',function(data){
+        		var append = "";
+        		for(key in data){
+        			append += "<a class='resultItem' hfre='javascript:void(0);'><li>" + data[key].japanese + "</li></a>";
+        		}
+        		serarchResult.html(append);
+        		$(".resultItem").on("click", function(e){
+        			serarchResult.css("display", "none");
+    		    	keyword.val(e.currentTarget.childNodes[0].innerHTML);
+    			});
+        	});
+        });
+    })();
     </script>
 
 </div>

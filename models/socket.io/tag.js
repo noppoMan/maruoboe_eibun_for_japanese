@@ -76,7 +76,12 @@ exports.apply = function(io){
       var tagSequence = require("../../models/dao/tagSequence");
 
 
-      tag.getCollection().find({chars : data.chars}, function(err, res){
+        var or = {$or : new Array()}
+        or['$or'][0] = {chars : data.chars};
+        or['$or'][1] = {name : data.text};
+
+
+      tag.getCollection().find(or, function(err, res){
           if(err){
             throw new Error(err.toString());
           }

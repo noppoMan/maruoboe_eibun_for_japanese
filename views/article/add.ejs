@@ -139,11 +139,17 @@ $(document).ready(function(){
             }
         }
         if(isEmit){
-            socket.emit('tagsearch',{chars:inputed , env : "<%= config.get('ENV') %>"});
+            socket.emit('tagsearch',{text : tagF.val(), chars:inputed , env : "<%= config.get('ENV') %>"});
             serarchResult.css("display", "block");
             serarchResult.html("");
         }
     });
+
+    //to empty recommend window when focus out.
+    tagF.on('blur', function(){
+        serarchResult.html("");
+    });
+    
 
     //タグを削除する
     var remTag = function(){
