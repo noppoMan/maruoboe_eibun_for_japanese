@@ -2,34 +2,15 @@
 
 -----------------------------------
 
-* author Yuki Takei 
-* company MikeTOKYO
+* author Yuki Takei(MikeTOKYO)
 * http://miketokyo.com
 * e-mail:yuki@miketokyo.com
 
 -----------------------------------
 <br />
 maruoboe_eibun_for_japanese is a English lerning app.<br />
-This is created by MikeTOKYO meets node.js, Which is a node.js Freme Work based on express.<br />
-If you want to use this app, you should resolve some dependencies.<br />
-<br />
-<pre>
--- Dependencies(required softwares and node_modelus)--
 
-software
---mongoDB 2.2
-
-node_modeuls
---express
---express-ejs-layouts
---ejs
---mongoose
---socket.io
-</pre>
-
-If you know more detail about the instllation, please access url below.<br />
+If you get more information about this app, please access the wiki page.<br />
 https://github.com/noppoMan/maruoboe_eibun_for_japanese/wiki/Maruoboe-Eibun-for-Japanese-Documentation
 
 Thank you and Enjoy your learning！
-
-Team MikeTOKYO meets node.js
