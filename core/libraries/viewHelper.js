@@ -7,7 +7,8 @@ exports.link = function(path, innerHtml, options){
 			addInfo += key + "='" + options[key] + "' ";
 		}
 	}
-	return "<a href='" + configure.get("BASE_URL") + path + "'" + addInfo +">" + innerHtml + "</a>";
+	var urlRoot = configure.get("BASE_URL") != false ? configure.get("BASE_URL") : '/';
+	return "<a href='" + urlRoot + path + "'" + addInfo +">" + innerHtml + "</a>";
 }
 
 
@@ -21,15 +22,15 @@ exports.loader = function(type, path, options){
 	}
 	switch(type){
 		case "img" :
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || '' + "images" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || '/' + "images" + "/" + path;
 			tag = "<img src='" + url + "' " + addInfo + ">";
 			break;
 		case "css" : 
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || ''   + "stylesheets" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || '/'   + "stylesheets" + "/" + path;
 			tag = "<link href='" + url + "' " + addInfo + ">";
 			break;
 		case "js" :
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || ''   + "javascripts" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || '/'   + "javascripts" + "/" + path;
 			tag = "<script src='" + url + "' " + addInfo + "></script>";
 			break;
 	}

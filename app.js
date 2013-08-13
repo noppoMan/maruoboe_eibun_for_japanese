@@ -32,6 +32,7 @@ app.configure(function(){
   app.set('layout', 'base');
 
   app.locals.helper = require('./core/libraries/viewHelper');
+  app.locals.config = configure;
 
   app.use(expressLayouts)
   app.use(express.favicon());
