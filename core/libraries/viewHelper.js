@@ -21,15 +21,15 @@ exports.loader = function(type, path, options){
 	}
 	switch(type){
 		case "img" :
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") + "images" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || '' + "images" + "/" + path;
 			tag = "<img src='" + url + "' " + addInfo + ">";
 			break;
 		case "css" : 
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL")  + "stylesheets" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || ''   + "stylesheets" + "/" + path;
 			tag = "<link href='" + url + "' " + addInfo + ">";
 			break;
 		case "js" :
-			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL")  + "javascripts" + "/" + path;
+			var url = (path.match(/http/)) ? path :  configure.get("BASE_URL") || ''   + "javascripts" + "/" + path;
 			tag = "<script src='" + url + "' " + addInfo + "></script>";
 			break;
 	}

@@ -6,18 +6,33 @@ var express = require('express')
   , expressLayouts = require('express-ejs-layouts')
   , http = require('http')
   , path = require('path')
-  , rc = require("./config/routing")
   , httpRequest = require("./core/networks/httpRequest")
-  , configure = require("./core/configures/configure");
+  , configure = require("./core/configures/configure")
+  , dynamicRouter = require("express-dynamic-router")
+  ;
 
 
 var app = express();
+
+var program = require('commander');
+program
+  .option('-e, --environment [environment]', 'environment')
+  .option('-p, --port [port]', 'listening port. default 3001')
+  .option('-l, --listen [listen]', 'listening address. default 0.0.0.0. set :: if listening ipv6')
+  .parse(process.argv);
+
+
+var mode = program.environment || 'developemnt';
+require('./config/environment/'+ mode);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.set('layout', 'base');
+
+  app.locals.helper = require('./core/libraries/viewHelper');
+
   app.use(expressLayouts)
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -31,9 +46,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-require("./core/autoRouting").getSet(rc.get, app);
-require("./core/autoRouting").postSet(rc.post, app);
+dynamicRouter
+.index(require('./routes/index').index)
+.register(app);
 
 //httpサーバー
 var server = http.createServer(app);

@@ -12,6 +12,7 @@
     "express-dynamic-router": "*",
     "express-ejs-layouts": "*",
     "mongoose": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "commander": "*"
   }
 }
